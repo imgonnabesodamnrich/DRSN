@@ -3,8 +3,11 @@
 > **A Deep Learning Framework for Highly Noised Vibration Signals**
 >
 > **Paper Title:** *Deep Residual Shrinkage Networks for Fault Diagnosis*
+> 
 > **Journal:** *IEEE Transactions on Industrial Informatics*, Vol. 16, No. 7, 2020
+> 
 > **DOI:**[10.1109/TII.2019.2943898](https://doi.org/10.1109/TII.2019.2943898)
+> 
 
 ![DOI](https://img.shields.io/badge/DOI-10.1109%2FTII.2019.2943898-blue) ![Status](https://img.shields.io/badge/Status-Published-brightgreen) ![Topic](https://img.shields.io/badge/Topic-Deep_Learning-orange) ![Topic](https://img.shields.io/badge/Topic-Fault_Diagnosis-orange)
 
@@ -13,7 +16,7 @@
 
 ## 目录
 
-- [1. 背景与动机](#1-背景与动机)
+- [1. 背景](#1-背景)
 - [2. 核心机制](#2-核心机制)
     - [2.1 软阈值化 (Soft Thresholding)](#21-软阈值化-soft-thresholding)
     - [2.2 自适应阈值计算子网络](#22-自适应阈值计算子网络)
@@ -26,11 +29,16 @@
 ---
 
 
-## 1. 背景与动机
+## 1. 背景
 
 工业旋转机械（如齿轮箱、轴承）的故障诊断通常依赖于振动信号分析。实际运行环境中存在大量背景噪声，导致故障初期的微弱信号容易被掩盖。
 
 传统的深度学习模型（如卷积神经网络 CNN、残差网络 ResNet）在处理高噪声信号时，容易将噪声干扰提取为特征，导致诊断准确率下降。深度残差收缩网络（Deep Residual Shrinkage Networks, DRSN）基于这一问题提出。该方法将传统信号处理中的软阈值化（Soft Thresholding）机制作为非线性变换层引入深度神经网络结构中，以消除噪声相关特征，提高模型在强噪声环境下的特征学习能力。
+
+<div align="center">
+  <img width="70%" src="https://github.com/user-attachments/assets/1ede7ae0-3219-4413-bc85-8d1e5e84f966" />
+  <p><em>图1 实验所用的动力传动系统故障诊断模拟器 </em></p>
+</div>
 
 ## 2. 核心机制
 
@@ -43,6 +51,11 @@ DRSN 的核心思想是在 ResNet 的残差模块内部，集成一个能够自�
 2. 将绝对值大于阈值的特征向零的方向进行收缩（即减去设定的阈值）。
 
 通过软阈值化，模型可以将接近于零的噪声特征剔除，同时保留绝对值较大的关键故障特征。由于该操作的导数在非零区域恒为 1，它同样具备防止梯度消失的作用。
+
+<div align="center">
+  <img width="80%" src="https://github.com/user-attachments/assets/9f79323d-8344-48bf-aecc-f0e86f57e0e2" />
+  <p><em>图2 软阈值化函数及其导数示意图 </em></p>
+</div>
 
 ### 2.2 自适应阈值计算子网络
 
@@ -62,8 +75,18 @@ DRSN 的核心思想是在 ResNet 的残差模块内部，集成一个能够自�
 ### 3.1 DRSN-CS（通道共享阈值）
 在 DRSN-CS（Channel-Shared）结构中，特征图的所有通道共用同一个软阈值。这种方式计算开销相对较小，适用于各通道噪声分布相对均匀的场景。
 
+<div align="center">
+  <img width="45%" src="https://github.com/user-attachments/assets/e387fe43-00f9-4380-87ed-b56058cf322f" />
+  <p><em>图3 具有通道共享阈值的残差收缩构建单元 (RSBU-CS) 结构 </em></p>
+</div>
+
 ### 3.2 DRSN-CW（通道独立阈值）
 在 DRSN-CW（Channel-Wise）结构中，全连接网络的输出神经元数量与特征图的通道数一致。这意味着每一个通道都会计算出一个独立的缩放系数，从而获得独立的阈值。由于不同的卷积通道通常包含不同程度的噪声信息，通道独立的阈值设定更为灵活，理论去噪能力与特征筛选能力更强。
+
+<div align="center">
+  <img width="45%" src="https://github.com/user-attachments/assets/202bcf78-2b4a-4e4b-9eb7-c077eb4feab1" />
+  <p><em>图4 具有通道独立阈值的残差收缩构建单元 (RSBU-CW) 结构 </em></p>
+</div>
 
 ## 4. 实验结论
 
@@ -75,6 +98,6 @@ DRSN 的核心思想是在 ResNet 的残差模块内部，集成一个能够自�
 
 ## 5. 文献来源
 
-- **标题 (Title):** Deep Residual Shrinkage Networks for Fault Diagnosis
-- **期刊 (Journal):** IEEE Transactions on Industrial Informatics (Volume 16, Issue 7, July 2020, Pages 4681-4690)
-- **DOI:** 10.1109/TII.2019.2943898
+- **标题 :** Deep Residual Shrinkage Networks for Fault Diagnosis
+- **期刊 :** IEEE Transactions on Industrial Informatics (Volume 16, Issue 7, July 2020, Pages 4681-4690)
+- **DOI :** [10.1109/TII.2019.2943898](https://doi.org/10.1109/TII.2019.2943898)
