@@ -1,4 +1,4 @@
-# 深度学习故障诊断论文笔记——深度残差收缩网络 (Deep Residual Shrinkage Networks, DRSN)
+# 论文笔记——深度残差收缩网络 (Deep Residual Shrinkage Networks, DRSN)
 
 > **A Deep Learning Framework for Highly Noised Vibration Signals**
 >
